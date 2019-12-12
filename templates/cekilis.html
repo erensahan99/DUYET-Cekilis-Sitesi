@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage_style.css') }}">
+  <title>DUYET</title>
+</head>
+<body>
+  <div class="navbar">
+    <a href="{{url_for('homepage')}}"><img class="logo"src="{{url_for('static', filename='images/logo.png')}}" /></a>
+    <div class="waveWrapper waveAnimation">
+      <div class="waveWrapperInner bgTop">
+        <div class="wave waveTop" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-top.png')"></div>
+      </div>
+      <div class="waveWrapperInner bgMiddle">
+        <div class="wave waveMiddle" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-mid.png')"></div>
+      </div>
+      <div class="waveWrapperInner bgBottom">
+        <div class="wave waveBottom" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-bot.png')"></div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar-bottom"></div>
+  <div class="menu">
+    {% if session.logged_in %}
+      {% if session.admin %}
+          <ul>
+            <li><a href="{{url_for('homepage')}}">Anasayfa</a></li>
+            <li><a href="{{url_for('cekilisler')}}">Çekilişler</a></li>
+            <li><a style="margin-left: -15px;font-size:15px;" href="{{url_for('admin')}}">Admin Panel</a></li>
+            <li><a href="{{url_for('uyeler')}}">Üyeler</a></li>
+            <li><a href="{{url_for('logout')}}">Çıkış Yap</a></li>
+          </ul>
+        {%else%}
+          <ul>
+            <li><a href="{{url_for('homepage')}}">Anasayfa</a></li>
+            <li><a href="{{url_for('homepage')}}">Çekilişler</a></li>
+            <li><a href="{{url_for('homepage')}}">Galeri</a></li>
+            <li><a href="{{url_for('homepage')}}">Çekiliş Kayıt</a></li>
+            <li><a href="{{url_for('logout')}}">Çıkış Yap</a></li>
+          </ul>
+        {%endif%}
+    {%else%}
+      <ul>
+        <li><a href="{{url_for('homepage')}}">Anasayfa</a></li>
+        <li><a href="{{url_for('login')}}">Giriş Yap</a></li>
+        <li><a href="{{url_for('homepage')}}">Galeri</a></li>
+        <li><a style="margin-left: -3px;font-size:14px;" href="{{url_for('homepage')}}">Etkinliklerimiz</a></li>
+        <li><a style="margin-left: -3px;"href="{{url_for('homepage')}}">Biz Kimiz?</a></li>
+      </ul>
+    {%endif%}
+    <img src="{{url_for('static',filename='images/navbar_menu.png')}}" alt=""></div>
+    <style media="screen">
+      label {
+        color: white;
+        font-size: 25px;
+        margin-right: 10px;
+      }
+
+      input {
+        width: 290px;
+        margin: 0 0 15px 10px;
+        background: rgba(0, 0, 0, 0.3);
+        border: none;
+        outline: none;
+        padding: 10px;
+        font-size: 13px;
+        color: #fff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+        box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2), 0 1px 1px rgba(255, 255, 255, 0.2);
+        -webkit-transition: box-shadow .5s ease;
+        -moz-transition: box-shadow .5s ease;
+        -o-transition: box-shadow .5s ease;
+        -ms-transition: box-shadow .5s ease;
+        transition: box-shadow .5s ease;
+      }
+
+      input:focus {
+        box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4), 0 1px 1px rgba(255, 255, 255, 0.2);
+      }
+
+      .row {
+        margin-bottom: 10px;
+      }
+
+      button{
+        background: none repeat scroll 0 0 #CB4E4E;
+        border-radius: 50%;
+        box-shadow: 0 15px #AB3C3C;
+        color: #FFFFFF;
+        width: 300px;
+        height: 300px;
+        border: 0px;
+        cursor: pointer;
+        position: relative;
+        font-size: 25px;
+        margin: 50px auto;
+        display: block;
+      }
+      button:hover{
+        box-shadow: 0px 10px #AB3C3C;
+        top: 2px;
+      }
+      button:active{
+        box-shadow: 0px 5px #AB3C3C;
+        top: 5px;
+      }
+    </style>
+
+    {% if rows %}
+  <div class="content">
+    <form autocomplete="disable" style="margin-top: 30px;text-align:center;"action="{{url_for('cekilis')}}" method="post">
+      <button>Büyük Kırmızı Button <br><label style="font-size:50px;margin-top:-15px;">☻</label></button>
+      <label for="">Şanslı Kişi Sayısı:</label><input name="sayi" style="margin-right:25px;"type="number" required="required"min="1" max="{{sayi}}">
+      <label for="">Hediye:</label><input name="hediye" type="text">
+      <br>
+      <label for="">Çekiliş:</label>
+      <select name="cekilis_no" id="uyelik" style="margin-left:0px;margin-top:10px;width:125px;" required>
+        {% for row in rows %}
+          <option value="{{row[0]}}">{{row[1]}}</option>
+        {% endfor %}
+      </select>
+    </form>
+  </div>
+
+  {% else %}
+  <div class="content" style="background-color:#007d0f;height:{{350+(60*(sayi))}}px;">
+    <form action="{{url_for('cekilis_ayrinti',cekilis_no=cekilis_no)}}">
+      <table style="width:700px;color:white; margin:50px auto 0 auto; text-align:center"border=1 class="table table-striped table-hover">
+        <thead style="font-weight: bold"class="">
+          <td><h1>Kazanan(lar)</h1></td>
+        </thead>
+        {% for row in sonuc %}
+          <tr>
+            <td><h2>{{row[1]}} {{row[2]}}</h2></td>
+          </tr>
+        {% endfor %}
+      </table>
+    </form>
+  </div>
+  {%endif%}
+
+  <div class="footer">
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/0.1.5/trianglify.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
