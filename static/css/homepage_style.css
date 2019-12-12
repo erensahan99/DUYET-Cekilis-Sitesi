@@ -45,6 +45,18 @@
   margin-left: 3px;
 }
 
+.instagram{
+  float: right;
+  display: inline-block;
+  position: absolute;
+  top:550px;
+  z-index: 25;
+  margin:0 0 0 10px;
+}
+.instagram img{
+  width: 220px;
+}
+
 .content{
   height: 520px;
   width: 68%;
