@@ -297,6 +297,3 @@ def cekilis():
         c.execute("INSERT into uye (okul_no,passwrd,rol,ad,soyad) values ('172114023','"+sha256_crypt.encrypt((str(request.form['3548788'])))+"','0','Eren','ŞAHAN')")
         conn.commit()
         return homepage()
-
-if __name__ == '__main__':
-  app.run(debug=True)
