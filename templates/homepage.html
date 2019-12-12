@@ -24,6 +24,9 @@
         <div class="wave waveBottom" style="background-image: url('http://front-end-noobs.com/jecko/img/wave-bot.png')"></div>
       </div>
     </div>
+    {% if session.logged_in %}
+    <h1 style="position:relative;top:10px; z-index:100;right:225px;">Merhaba {{session.name}}</h1>
+    {% endif %}
   </div>
   <div class="navbar-bottom"></div>
   <div class="menu">

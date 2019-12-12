@@ -106,7 +106,7 @@
     <a href="{{url_for('cekilis_sil',cekilis_no=cekilis_no)}}"><button style="float:right;width: 300px; margin:0 150px 0 auto;" class="btn btn-danger btn-block btn-large">Çekilişi SİL!!!</button></a>
     <br><br>
     {% if rows %}
-    <form action="{{url_for('cekilis_ayrinti',cekilis_no=cekilis_no)}}">
+    <form action="{{url_for('cekilis_sil')}}", method="POST">
       <table style="width:700px;color:white; margin:20px auto 0 auto; text-align:center"border=1 class="table table-striped table-hover">
         <thead style="font-weight: bold"class="">
           <td style="width:10px;">*</td>
@@ -115,13 +115,13 @@
         </thead>
         {% for row in rows %}
           <tr>
-            <td style="width:10px;"><input type="checkbox"></td>
+            <td> <input type="checkbox" id="{{row[0]}}" name="checked" value="{{row[0]}}"></td>
             <td>{{row[1]}} {{row[2]}}</td>
             <td>{{row[11]}}</td>
           </tr>
         {% endfor %}
       </table>
-      <button style="float:right;width: 200px; margin-top: 10px;margin-right:150px;" type="submit" class="btn btn-danger btn-block btn-large">Seçili Kayıtları SİL</button>
+      <button style="float:right;width: 200px; margin-top: 10px;margin-right:150px;" name="select" type="submit" class="btn btn-danger btn-block btn-large">Seçili Kayıtları SİL</button>
     </form>
     {% else %}
     <h1 style="color:white;text-align:center;margin-top:20px;">Çekilişe ait katılımcı bulunmamaktadır.</h1>

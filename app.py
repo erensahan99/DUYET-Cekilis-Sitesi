@@ -82,6 +82,7 @@ def login():
             if sha256_crypt.verify(request.form['passwd'],passwrd):
                 session['logged_in'] = True
                 session['uye_no']=data[0]
+                session['name']=data[4]
                 if rol==0:
                     session['admin']=True
                 else:
@@ -196,13 +197,17 @@ def cekilis_ayrinti(cekilis_no=0):
         tarih=data[2]
         return render_template("cekilis-ayrinti.html",ad=ad,tarih=tarih,cekilis_no=cekilis_no,rows=rows,sayi=sayi)
 
-@app.route("/cekilis_sil/<cekilis_no>/")
+@app.route("/cekilis_sil/",methods=['GET','POST'])
 @login_required
 @admin_required
-def cekilis_sil(cekilis_no=0):
-    c,conn=connection()
-    c.execute("DELETE FROM cekilis WHERE cekilis_no=(%s)",[cekilis_no])
-    conn.commit()
+def cekilis_sil():
+    if request.method=="POST":
+        c,conn=connection()
+        boxs = request.form.getlist("checked")
+        for box in boxs:
+            c.execute("DELETE FROM katilimci WHERE katilimci_no= (%s)",[box])
+        conn.commit()
+        return cekilisler()
     return cekilisler()
 
 @app.route("/yeni_cekilis/",methods=['GET','POST'])
@@ -302,3 +307,6 @@ def setup112():
     conn.commit()
     flash('İşlem Başarı ile Gerçekleşti')
     return homepage()
+
+if __name__ == '__main__':
+    app.run(debug=True)

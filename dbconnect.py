@@ -12,3 +12,11 @@ def connection():
     c.execute("SET CHARACTER SET utf8")
     c.execute("SET COLLATION_CONNECTION = 'utf8_turkish_ci'")
     return c,conn
+'''
+    conn=MySQLdb.connect(host="localhost",
+                         user= "root",
+                         passwd="",
+                         db="duyet",
+                         autocommit=True,
+                         charset='utf8')
+'''
