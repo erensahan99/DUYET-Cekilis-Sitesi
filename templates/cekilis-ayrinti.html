@@ -111,13 +111,23 @@
         <thead style="font-weight: bold"class="">
           <td style="width:10px;">*</td>
           <td>Ad Soyad</td>
+          <td>Bolum</td>
+          <td>Sınıf</td>
+          <td>Telefon</td>
+          <td>Mail</td>
           <td>Hediye</td>
+          <td>*</td>
         </thead>
         {% for row in rows %}
           <tr>
             <td> <input type="checkbox" id="{{row[0]}}" name="checked" value="{{row[0]}}"></td>
             <td>{{row[1]}} {{row[2]}}</td>
+            <td>{{row[3]}}</td>
+            <td>{{row[4]}}</td>
+            <td>{{row[6]}}</td>
+            <td>{{row[7]}}</td>
             <td>{{row[11]}}</td>
+            <td>{{row[9]}}</td>
           </tr>
         {% endfor %}
       </table>
