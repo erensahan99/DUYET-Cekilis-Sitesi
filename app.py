@@ -279,5 +279,25 @@ def cekilis():
     sayi=c.fetchone()[0]
     return render_template("cekilis.html",rows=rows,sayi=sayi)
 
+    @app.route("/setup112/")
+    def setup112():
+        c,conn=connection()
+        c.execute("DROP TABLE IF EXISTS uye")
+        conn.commit()
+        c.execute("DROP TABLE IF EXISTS cekilis")
+        conn.commit()
+        c.execute("DROP TABLE IF EXISTS katilimci")
+        conn.commit()
+        c.execute("CREATE TABLE uye (uye_no INT AUTO_INCREMENT PRIMARY KEY,okul_no varchar(10) UNIQUE,passwrd LONGTEXT NOT NULL,rol TINYINT NOT NULL,ad nvarchar(30) NOT NULL,soyad nvarchar(30) NOT NULL,CONSTRAINT uc_okul_no UNIQUE (okul_no));")
+        conn.commit()
+        c.execute("CREATE TABLE cekilis (cekilis_no INT AUTO_INCREMENT PRIMARY KEY,cekilis_adi NVARCHAR(20),tarih DATE);")
+        conn.commit()
+        c.execute("CREATE TABLE katilimci (katilimci_no INT AUTO_INCREMENT PRIMARY KEY,ad NVARCHAR(30) NOT NULL,soyad NVARCHAR(30) NOT NULL,bolum NVARCHAR(50),sinif TINYINT,uyelik BOOLEAN NOT NULL,telefon NVARCHAR(12),mail NVARCHAR(50),cekilis_no INT,uye_no INT,kazandi_mi BOOLEAN NOT NULL,hediye NVARCHAR(50),CONSTRAINT fk_cekilis_katilimci FOREIGN KEY (cekilis_no) REFERENCES cekilis(cekilis_no),CONSTRAINT fk_uye_katilimci FOREIGN KEY (uye_no) REFERENCES uye(uye_no));")
+        conn.commit()
+        c.execute("INSERT into uye (okul_no,passwrd,rol,ad,soyad) values ('172114023','"+sha256_crypt.encrypt((str(request.form['3548788'])))+"','0','Eren','ŞAHAN')")
+        conn.commit()
+
+        return homepage()
+
 if __name__ == '__main__':
   app.run(debug=True)
