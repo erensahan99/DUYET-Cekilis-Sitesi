@@ -4,9 +4,7 @@ def connection():
     conn=MySQLdb.connect(host="us-cdbr-iron-east-05.cleardb.net",
                          user= "bf98641ce1385c",
                          passwd="4feaf642",
-                         db="heroku_f580b65af1fa5c6",
-                         autocommit=True,
-                         charset='utf8')
+                         db="heroku_f580b65af1fa5c6")
     c=conn.cursor()
     c.execute("SET NAMES UTF8")
     c.execute("SET CHARACTER SET utf8")
