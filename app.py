@@ -172,6 +172,12 @@ def cekilisler():
     rows=c.fetchall()
     c.execute('SELECT COUNT(*) FROM cekilis')
     cekilis_sayisi=c.fetchone()
+    katilimci_sayisi=[]
+    for row in rows:
+        c.execute("SELECT COUNT(*) FROM katilimci WHERE cekilis_no=(%s)",[row[0]])
+        katilimci_sayisi.append(c.fetchone[0])
+    for i in range(len(rows)):
+        rows[i].append(katilimci_sayisi[i])
     c.close()
     conn.close()
     return render_template("cekilisler.html",rows=rows,sayi=cekilis_sayisi[0])
