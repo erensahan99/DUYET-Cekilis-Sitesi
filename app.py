@@ -174,8 +174,9 @@ def cekilisler():
     cekilis_sayisi=c.fetchone()
     katilimci_sayisi=[]
     for row in rows:
+        i=rows.index(row)
         c.execute("SELECT COUNT(*) FROM katilimci WHERE cekilis_no=(%s)",[row[0]])
-        katilimci_sayisi.append(c.fetchone[0])
+        katilimci_sayisi[i].append(c.fetchone[0])
     for i in range(len(rows)):
         rows[i].append(katilimci_sayisi[i])
     c.close()
