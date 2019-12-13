@@ -176,12 +176,14 @@ def cekilisler():
     for row in rows:
         i=rows.index(row)
         c.execute("SELECT COUNT(*) FROM katilimci WHERE cekilis_no=(%s)",[row[0]])
-        katilimci_sayisi[i].append(c.fetchone[0])
-    for i in range(len(rows)):
-        rows[i].append(katilimci_sayisi[i])
+        katilimci_sayisi.append(c.fetchone()[0])
+    table=[]
+    for row in rows:
+        i=rows.index(row)
+        table.append(list(row)+[katilimci_sayisi[i]])
     c.close()
     conn.close()
-    return render_template("cekilisler.html",rows=rows,sayi=cekilis_sayisi[0])
+    return render_template("cekilisler.html",table=table,sayi=cekilis_sayisi[0])
 
 @app.route("/cekilis-ayrinti/<cekilis_no>",methods=['GET','POST'])
 @login_required
