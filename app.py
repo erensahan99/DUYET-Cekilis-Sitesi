@@ -1,17 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-import os
-import gc
-from flask import Flask, render_template, url_for, flash, request, redirect, session
-from db_connect import connection
-from wtforms import Form, BooleanField, TextField, IntegerField, FormField, PasswordField, FileField, validators,MultipleFileField
-from flask_wtf.file import FileField, FileRequired, FileAllowed
-from werkzeug.utils import secure_filename
-from wtforms.validators import Length
-from passlib.hash import sha256_crypt
-from MySQLdb import escape_string as thwart
-from functools import wraps
-"""
 
 import gc
 import os
