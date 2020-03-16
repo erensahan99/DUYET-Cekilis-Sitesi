@@ -1,5 +1,5 @@
-venv
-Files
-__pycache__
+/venv/
+/Files/
+/__pycache__/
 
 dbconnect.py
