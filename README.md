@@ -1,1 +1,1 @@
-https://duyet.herokuapp.com
+duyet.herokuapp.com
